@@ -1,0 +1,11 @@
+{
+  "name": "tower-server",
+  "version": "0.5.0",
+  "main": "./index.js",
+  "dependencies": {
+
+  },
+  "devDependencies": {
+
+  }
+}
