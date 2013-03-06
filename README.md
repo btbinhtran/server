@@ -1,0 +1,4 @@
+# Tower Server
+
+## License
+**MIT**
