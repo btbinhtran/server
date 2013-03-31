@@ -14,7 +14,8 @@ module.exports = function(program) {
  */
 
 function Server(args) {
-  this.app = createApp(app);
+  this.environment = args.environment || "development";
+  this.app = createApp(app, this);
 }
 
 
