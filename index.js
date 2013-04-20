@@ -1,3 +1,8 @@
+
+/**
+ * Module dependendencies.
+ */
+
 var application = require('tower-app')
   , express = require('express')
   , sockjs = require('sockjs')
@@ -6,32 +11,32 @@ var application = require('tower-app')
   , http = require('http');
 
 /**
- * @package Tower-Server
+ * Expose `server`.
  */
 
-module.exports = function(args) {
+module.exports = server;
+
+/**
+ * Create singleton `Server`.
+ */
+
+function server(args) {
   if (instance) return instance;
   return instance = new Server(args);
 }
 
-module.exports.instance = function() {
-  return instance;
-}
-
 /**
- * Constructor
+ * Create a new `Server`.
  */
 
 function Server(args) {
-  var self = this;
-
   this.options = {
-    port: args.port || 3000,
-    environment: args.environment || "development"
+      port: args.port || 3000
+    , environment: args.environment || 'development'
   }
 
   this.io = sockjs.createServer({
-    sockjs_url: "http://cdn.sockjs.org/sockjs-0.3.min.js"
+      sockjs_url: 'http://cdn.sockjs.org/sockjs-0.3.min.js'
     , log: function() {}
   });
 
@@ -49,31 +54,28 @@ function Server(args) {
   this.app = application;
   this.app.init(this);
 
-
   this.server = http.createServer(this.express);
-  this.io.installHandlers(this.server, {
-    prefix: '/echo'
-  });
+  this.io.installHandlers(this.server, { prefix: '/echo' });
 }
 
-Server.prototype.listen = function() {
+Server.prototype.listen = function(){
   this.server.listen(this.options.port, '0.0.0.0');
-  console.log("Tower is listening on " + this.options.port)
+  console.log("Tower is listening on " + this.options.port);
 };
 
-Server.prototype.initializeSockets = function() {
+Server.prototype.initializeSockets = function(){
   var self = this;
-  this.io.on('connection', function(socket) {
-
-    socket.send = function(data) {
+  
+  this.io.on('connection', function(socket){
+    socket.send = function(data){
       socket.write(data);
     };
 
-    socket.on('data', function(message) {
+    socket.on('data', function(message){
       console.log(message);
     });
 
-    socket.on('close', function() {
+    socket.on('close', function(){
       var open = [];
       for (var i = 0, n = self.openSockets.length; i < n; i++) {
         if (self.openSockets[i] !== socket) {
@@ -85,19 +87,14 @@ Server.prototype.initializeSockets = function() {
 
     self.openSockets.push(socket);
 
-    self.callbacks.forEach(function(cb) {
-      cb(socket);
-    })
-
+    self.callbacks.forEach(function(fn){
+      fn(socket);
+    });
   });
-
 };
 
-Server.prototype.emit = function(data) {
-  var self = this;
-
+Server.prototype.emit = function(data){
   this.openSockets.forEach(function(socket) {
     socket.send(JSON.stringify(data));
   });
-
 };
