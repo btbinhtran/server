@@ -6,9 +6,9 @@
 var application = require('tower-app')
   , express = require('express')
   , sockjs = require('sockjs')
-  , instance = null
   , Bundle = require('tower-bundle')
-  , http = require('http');
+  , http = require('http')
+  , instance;
 
 /**
  * Expose `server`.
@@ -65,7 +65,7 @@ Server.prototype.listen = function(){
 
 Server.prototype.initializeSockets = function(){
   var self = this;
-  
+
   this.io.on('connection', function(socket){
     socket.send = function(data){
       socket.write(data);
@@ -94,7 +94,7 @@ Server.prototype.initializeSockets = function(){
 };
 
 Server.prototype.emit = function(data){
-  this.openSockets.forEach(function(socket) {
+  this.openSockets.forEach(function(socket){
     socket.send(JSON.stringify(data));
   });
 };
