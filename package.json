@@ -3,7 +3,10 @@
   "version": "0.5.0",
   "main": "./index.js",
   "dependencies": {
-    "express": "latest"
+    "express": "latest",
+    "sockjs": "*",
+    "tower-app": "*",
+    "socket.io": "*"
   },
   "devDependencies": {
 
