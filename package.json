@@ -5,7 +5,6 @@
   "dependencies": {
     "express": "latest",
     "sockjs": "*",
-    "tower-app": "*",
     "socket.io": "*"
   },
   "devDependencies": {

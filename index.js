@@ -1,4 +1,4 @@
-var application = require('tower-app')
+var application = {}
   , express = require('express')
   , sockjs = require('sockjs')
   , instance = null
@@ -47,13 +47,12 @@ function Server(args) {
   this.express.use('/public', express.static(process.cwd() + '/public'));
 
   this.app = application;
-  this.app.init(this);
-
 
   this.server = http.createServer(this.express);
   this.io.installHandlers(this.server, {
     prefix: '/echo'
   });
+
 }
 
 Server.prototype.listen = function() {
