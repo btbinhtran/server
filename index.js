@@ -1,13 +1,9 @@
-<<<<<<< HEAD
-var application = {}
-=======
 
 /**
  * Module dependendencies.
  */
 
-var application = require('tower-app')
->>>>>>> a331cc5137638a70b84e4bbce98cd6ddbdfbfd9d
+var application = {}
   , express = require('express')
   , sockjs = require('sockjs')
   , Bundle = require('tower-bundle')
