@@ -5,8 +5,7 @@
   "dependencies": {
     "express": "latest",
     "sockjs": "*",
-    "socket.io": "*",
-    "tower-bundle": "~0.5.0pre"
+    "socket.io": "*"
   },
   "devDependencies": {
 

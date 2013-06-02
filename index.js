@@ -6,7 +6,7 @@
 var application = {};
 var express = require('express');
 var sockjs = require('sockjs');
-var Bundle = require('tower-bundle');
+//var Bundle = require('tower-bundle');
 var http = require('http');
 var instance;
 
