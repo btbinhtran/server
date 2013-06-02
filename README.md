@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-npm install tower-server
+$ npm install tower-server
 ```
 
 ## License

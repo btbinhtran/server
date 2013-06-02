@@ -3,12 +3,12 @@
  * Module dependendencies.
  */
 
-var application = {}
-  , express = require('express')
-  , sockjs = require('sockjs')
-  , Bundle = require('tower-bundle')
-  , http = require('http')
-  , instance;
+var application = {};
+var express = require('express');
+var sockjs = require('sockjs');
+var Bundle = require('tower-bundle');
+var http = require('http');
+var instance;
 
 /**
  * Expose `server`.
@@ -31,13 +31,13 @@ function server(args) {
 
 function Server(args) {
   this.options = {
-      port: args.port || 3000
-    , environment: args.environment || 'development'
+    port: args.port || 3000,
+    environment: args.environment || 'development'
   }
 
   this.io = sockjs.createServer({
-      sockjs_url: 'http://cdn.sockjs.org/sockjs-0.3.min.js'
-    , log: function() {}
+    sockjs_url: 'http://cdn.sockjs.org/sockjs-0.3.min.js',
+    log: function() {}
   });
 
   this.openSockets = [];
