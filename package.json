@@ -1,6 +1,6 @@
 {
   "name": "tower-server",
-  "version": "0.5.0pre",
+  "version": "0.1.0pre",
   "main": "./index.js",
   "dependencies": {
     "express": "latest",
