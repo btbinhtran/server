@@ -18,6 +18,10 @@ module.exports = server;
 
 /**
  * Create singleton `Server`.
+ *
+ * @param {Object} args Server setup options like port number and environment.
+ * @return {Server} A server object.
+ * @api public
  */
 
 function server(args) {
@@ -26,7 +30,12 @@ function server(args) {
 }
 
 /**
- * Create a new `Server`.
+ * Class representing a server
+ *
+ * @class
+ * 
+ * @param {Object} args Server setup options like port number and environment.
+ * @api public
  */
 
 function Server(args) {
@@ -57,10 +66,22 @@ function Server(args) {
   this.io.installHandlers(this.server, { prefix: '/echo' });
 }
 
+/**
+ * Start server and listen on it's specified port number.
+ *
+ * @api public
+ */
+
 Server.prototype.listen = function(){
   this.server.listen(this.options.port, '0.0.0.0');
   console.log("Tower is listening on " + this.options.port);
 };
+
+/**
+ * Initialize sockets.
+ *
+ * @api public
+ */
 
 Server.prototype.initializeSockets = function(){
   var self = this;
@@ -91,6 +112,13 @@ Server.prototype.initializeSockets = function(){
     });
   });
 };
+
+/**
+ * Emit data to all open sockets.
+ *
+ * @param {Object} data Data to send to open sockets.
+ * @api public
+ */
 
 Server.prototype.emit = function(data){
   this.openSockets.forEach(function(socket){
